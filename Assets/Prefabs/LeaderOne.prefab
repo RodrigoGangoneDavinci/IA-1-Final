@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 560564733731145123}
   - component: {fileID: 3140100642804821829}
   - component: {fileID: 5610768927019581124}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeaderOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  maxHp: 100
+  speed: 4
+  rotation: 10
+  safeNode: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &7407713928151045122
 GameObject:
@@ -135,7 +139,7 @@ GameObject:
   - component: {fileID: 8088048339684362013}
   - component: {fileID: 3605229453229419658}
   - component: {fileID: 1806396740693609363}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -18,7 +18,7 @@ public class ScapeState : State
     {
         _destination = _leader.SafeNodePosition;
 
-        if (HasLineOfSight(_destination))
+        if (_leader.HasLineOfSight(_destination))
         {
             Debug.Log($"[Leader {_leader.name}] ESCAPANDO por LINE OF SIGHT hacia nodo seguro.");
             _path.Clear();
@@ -67,15 +67,4 @@ public class ScapeState : State
     {
         _path.Clear();
     }
-
-    //TODO: hacer este metodo parte de LEADER para usar en MoveState y en ScapeState
-    bool HasLineOfSight(Vector3 target)
-    {
-        Vector3 origin = _leader.transform.position + Vector3.up * 0.5f;
-        Vector3 dir = (target - origin).normalized;
-        float dist = Vector3.Distance(origin, target);
-
-        return !Physics.Raycast(origin, dir, dist, LayerMask.GetMask("Wall"));
-    }
-    
 }

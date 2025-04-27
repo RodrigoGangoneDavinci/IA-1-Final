@@ -18,7 +18,7 @@ public class MoveState : State
     {
         _destination = _leader.targetPosition;
 
-        if (HasLineOfSight(_destination))
+        if (_leader.HasLineOfSight(_destination))
         {
             Debug.Log($"[Leader {_leader.name}] Usando LINE OF SIGHT hacia {_destination}");
             _path.Clear();
@@ -29,6 +29,7 @@ public class MoveState : State
         {
             Debug.Log($"[Leader {_leader.name}] Usando THETA* hacia {_destination}");
             _path = ThetaStarPathfinding.GetPath(_leader.transform.position, _destination);
+            Debug.Log($"Path hacia Node(1) tiene {_path.Count} pasos");
             _currentPathIndex = 0;
         }
     }
@@ -52,11 +53,9 @@ public class MoveState : State
         }
         else
         {
-            // Movimiento
             Vector3 moveDir = flatDir.normalized;
             _leader.transform.position += moveDir * (_leader.speed * Time.deltaTime);
 
-            // Rotación suave hacia el objetivo
             if (moveDir != Vector3.zero)
             {
                 Quaternion targetRot = Quaternion.LookRotation(moveDir);
@@ -68,15 +67,5 @@ public class MoveState : State
     public override void OnExit()
     {
         _path.Clear();
-    }
-
-    //TODO: hacer este metodo parte de LEADER para usar en MoveState y en ScapeState
-    bool HasLineOfSight(Vector3 target)
-    {
-        Vector3 origin = _leader.transform.position + Vector3.up * 0.5f;
-        Vector3 dir = (target - origin).normalized;
-        float dist = Vector3.Distance(origin, target);
-        
-        return !Physics.Raycast(origin, dir, dist, LayerMask.GetMask("Wall"));
     }
 }

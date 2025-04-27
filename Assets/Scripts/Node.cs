@@ -19,7 +19,10 @@ public class Node : MonoBehaviour
 
         foreach (var dir in directions)
         {
-            if (Physics.Raycast(transform.position, dir, out RaycastHit hit, 4.5f))
+            // ignoro la layer "Leader"
+            int mask = ~(1 << LayerMask.NameToLayer("Leader"));
+
+            if (Physics.Raycast(transform.position, dir, out RaycastHit hit, 4.5f, mask))
             {
                 Node neighbor = hit.collider.GetComponent<Node>();
                 if (neighbor != null && !Physics.Raycast(transform.position, dir, 4.5f, LayerMask.GetMask("Wall")))
@@ -43,9 +46,12 @@ public class Node : MonoBehaviour
         foreach (Vector3 dir in directions)
         {
             Vector3 target = origin + dir * 4.5f;
+            
+            // ignoro la layer "Leader"
+            int mask = ~(1 << LayerMask.NameToLayer("Leader"));
 
             Ray ray = new Ray(origin, dir);
-            if (Physics.Raycast(ray, out RaycastHit hit, 4.5f, ~0, QueryTriggerInteraction.Collide))
+            if (Physics.Raycast(ray, out RaycastHit hit, 4.5f, mask, QueryTriggerInteraction.Collide))
             {
                 if (hit.collider.GetComponent<Node>() != null)
                 {
