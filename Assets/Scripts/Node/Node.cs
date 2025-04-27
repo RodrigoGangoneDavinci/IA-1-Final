@@ -19,6 +19,7 @@ public class Node : MonoBehaviour
 
         foreach (var dir in directions)
         {
+            //TODO: agregar que ignore tambien a la layermask "NPC"
             // ignoro la layer "Leader"
             int mask = ~(1 << LayerMask.NameToLayer("Leader"));
 
