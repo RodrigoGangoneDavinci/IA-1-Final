@@ -5,7 +5,7 @@ public class Leader : MonoBehaviour
     protected FiniteStateMachine _fsm;
     public float hp;
     public float maxHp = 100f;
-    public float speed = 4f;
+    public float speed = 5f;
     public float rotation = 10f;
     
     [SerializeField] Transform safeNode;

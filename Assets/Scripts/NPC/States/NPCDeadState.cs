@@ -12,6 +12,8 @@ public NPCDeadState(NPC npc)
 public override void OnEnter()
 {
     Debug.Log($"[NPC {_npc.name}] Entre a Dead");
+    GameManager.instance.UnregisterNPC(_npc);
+    GameObject.Destroy(_npc.gameObject);
 }
 
 public override void OnUpdate()

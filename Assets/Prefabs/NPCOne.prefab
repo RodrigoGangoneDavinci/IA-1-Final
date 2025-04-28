@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5002104392413171642}
   - component: {fileID: 1531004045545841306}
   - component: {fileID: 5936123392377844238}
+  - component: {fileID: 7442777252655688444}
   m_Layer: 7
   m_Name: NPCOne
   m_TagString: Untagged
@@ -106,6 +107,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7442777252655688444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6770764776107543996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8eae01b4ee34f0418e64805dec7d28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxSpeed: 5
+  _maxForce: 5
+  _viewRadius: 2
+  _obstacles:
+    serializedVersion: 2
+    m_Bits: 8
+  myTeam: 0
+  leaderToFollow: {fileID: 5610768927019581124, guid: 8ffb4eaa9b28aae41b33ecf52fabf587, type: 3}
+  hp: 100
+  maxHp: 100
+  safeNode: {fileID: 0}
+  viewRadius: 2
+  viewAngle: 120
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 8
+  allEnemies: []
 --- !u!1 &7707705204868925740
 GameObject:
   m_ObjectHideFlags: 0

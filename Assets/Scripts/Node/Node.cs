@@ -34,7 +34,7 @@ public class Node : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
         Vector3 origin = transform.position;
         Vector3[] directions = {
@@ -74,6 +74,6 @@ public class Node : MonoBehaviour
 
             Gizmos.DrawLine(origin, target);
         }
-    }
+    }*/
 
 }

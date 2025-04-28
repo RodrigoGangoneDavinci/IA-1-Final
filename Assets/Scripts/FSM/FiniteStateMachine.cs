@@ -12,7 +12,7 @@ public class FiniteStateMachine : MonoBehaviour
         _currentState?.OnUpdate();
     }
 
-    public void AddState(LeaderStates name, State state)
+    public void AddState(Enum name, State state)
     {
         if (!_allStates.ContainsKey(name))
         {
@@ -25,7 +25,7 @@ public class FiniteStateMachine : MonoBehaviour
         }
     }
 
-    public void ChangeState(LeaderStates name) 
+    public void ChangeState(Enum name) 
     {
         _currentState?.OnExit();
         if (_allStates.ContainsKey(name)) _currentState = _allStates[name];

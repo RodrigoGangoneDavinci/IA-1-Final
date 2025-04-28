@@ -20,14 +20,12 @@ public class ScapeState : State
 
         if (_leader.HasLineOfSight(_destination))
         {
-            Debug.Log($"[Leader {_leader.name}] ESCAPANDO por LINE OF SIGHT hacia nodo seguro.");
             _path.Clear();
             _path.Add(_destination);
             _currentPathIndex = 0;
         }
         else
         {
-            Debug.Log($"[Leader {_leader.name}] ESCAPANDO por THETA* hacia nodo seguro.");
             _path = ThetaStarPathfinding.GetPath(_leader.transform.position, _destination);
             _currentPathIndex = 0;
         }

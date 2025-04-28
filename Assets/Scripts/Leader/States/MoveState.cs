@@ -20,16 +20,13 @@ public class MoveState : State
 
         if (_leader.HasLineOfSight(_destination))
         {
-            Debug.Log($"[Leader {_leader.name}] Usando LINE OF SIGHT hacia {_destination}");
             _path.Clear();
             _path.Add(_destination);
             _currentPathIndex = 0;
         }
         else
         {
-            Debug.Log($"[Leader {_leader.name}] Usando THETA* hacia {_destination}");
             _path = ThetaStarPathfinding.GetPath(_leader.transform.position, _destination);
-            Debug.Log($"Path hacia Node(1) tiene {_path.Count} pasos");
             _currentPathIndex = 0;
         }
     }
