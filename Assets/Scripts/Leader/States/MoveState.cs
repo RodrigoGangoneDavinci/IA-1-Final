@@ -45,7 +45,7 @@ public class MoveState : State
             _currentPathIndex++;
             if (_currentPathIndex >= _path.Count)
             {
-                fsm.ChangeState(LeaderStates.Idle);
+                _leader._fsm.ChangeState(LeaderStates.Idle);
             }
         }
         else

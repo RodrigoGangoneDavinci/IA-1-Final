@@ -39,4 +39,17 @@ public class GameManager : MonoBehaviour
 
         return teamList;
     }
+    
+    public List<NPC> GetAllNPCsFromCounterTeam(LeaderTeam myTeam)
+    {
+        LeaderTeam counterTeam = myTeam.Equals(LeaderTeam.LeaderOne) ? LeaderTeam.LeaderTwo : LeaderTeam.LeaderOne; 
+        List<NPC> teamList = new();
+
+        foreach (var npc in allNPCs)
+        {
+            if (npc.myTeam == counterTeam) teamList.Add(npc);
+        }
+
+        return teamList;
+    }
 }

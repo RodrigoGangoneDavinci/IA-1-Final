@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 public class NPC : MonoBehaviour
 {
-    private FiniteStateMachine _fsm; //✅
+    public FiniteStateMachine _fsm; //✅
 
     [Header("Basics")]
     [SerializeField] public LeaderTeam myTeam; //✅
@@ -20,7 +21,7 @@ public class NPC : MonoBehaviour
 
     [Header("Flocking Settings")] 
     [SerializeField, Range(0f, 2f)] float _alignmentWeight = 1f; //✅
-    [SerializeField, Range(0f, 2f)] float _separationWeight = 1f; //✅
+    [SerializeField, Range(0f, 2f)] float _separationWeight = 1.75f; //✅
     [SerializeField, Range(0f, 2f)] float _cohesionWeight = 1f; //✅
     private Vector3 _velocity; //Direccion en la que tiene que moverse
 
@@ -31,13 +32,14 @@ public class NPC : MonoBehaviour
 
     [Header("Enemies")] 
     [SerializeField] List<NPC> allEnemies = new(); //✅ // se llena automáticamente desde un GameManager
-    [SerializeField] float _rangeToAttack = 0.5f; //✅ //Rango para atacar
+    [SerializeField] public float rangeToAttack = 1f; //✅ //Rango para atacar
 
     public Vector3 TargetPosition => leaderToFollow != null ? leaderToFollow.transform.position : transform.position;
 
     private void Awake()
     {
         hp = maxHp;
+        rangeToAttack = _viewRadius / 2;
     }
 
     void Start()
@@ -45,11 +47,11 @@ public class NPC : MonoBehaviour
         GameManager.instance.RegisterNPC(this);
 
         _fsm = new FiniteStateMachine();
-        _fsm.AddState(NPCStates.Idle, new NPCIdleState(this));
-        _fsm.AddState(NPCStates.Move, new NPCMoveState(this));
-        _fsm.AddState(NPCStates.Attack, new NPCAttackState(this));
-        _fsm.AddState(NPCStates.Scape, new NPCScapeState(this));
-        _fsm.AddState(NPCStates.Dead, new NPCDeadState(this));
+        _fsm.AddState(NPCStates.Scape, new NPCScapeState(this)); //1- Escapar si tengo poca vida
+        _fsm.AddState(NPCStates.Idle, new NPCIdleState(this)); //2-Verifico si estoy lejos del "nanana Lider"
+        _fsm.AddState(NPCStates.Move, new NPCMoveState(this)); //3- Aplico (floking [arrive + separation])
+        _fsm.AddState(NPCStates.Attack, new NPCAttackState(this)); // 4-Atacar a NPCs contrarios si estan en field o view
+        _fsm.AddState(NPCStates.Dead, new NPCDeadState(this)); //Muerte si mi vida llega a 0
 
         _fsm.ChangeState(NPCStates.Idle);
     }
@@ -57,6 +59,16 @@ public class NPC : MonoBehaviour
     void Update()
     {
         _fsm.Update();
+
+        //Prioridades
+        // 1- Escapar si tengo poca vida
+        //if (hp <= maxHp / 2) _fsm.ChangeState(NPCStates.Scape);
+        
+        //TODO: DEBUG -> Daño a todos los NPCs sin importar el LEADER TEAM
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            TakeDamage(25f);
+        }
     }
 
     public void Flocking()
@@ -80,7 +92,7 @@ public class NPC : MonoBehaviour
     }
 
     //Line Of Sight
-    bool HasLineOfSight(Vector3 start, Vector3 end)
+    public bool HasLineOfSight(Vector3 start, Vector3 end)
     {
         Vector3 dir = end - start;
         return !Physics.Raycast(start, dir.normalized, dir.magnitude, _obstacles);

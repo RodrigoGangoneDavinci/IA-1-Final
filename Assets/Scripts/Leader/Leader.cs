@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Leader : MonoBehaviour
 {
-    protected FiniteStateMachine _fsm;
+    public FiniteStateMachine _fsm;
     public float hp;
     public float maxHp = 100f;
     public float speed = 5f;

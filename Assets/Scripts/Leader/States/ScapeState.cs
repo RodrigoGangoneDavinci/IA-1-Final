@@ -45,7 +45,7 @@ public class ScapeState : State
             _currentPathIndex++;
             if (_currentPathIndex >= _path.Count)
             {
-                fsm.ChangeState(LeaderStates.Idle); // se queda en nodo seguro
+                _leader._fsm.ChangeState(LeaderStates.Idle); // se queda en nodo seguro
             }
         }
         else
