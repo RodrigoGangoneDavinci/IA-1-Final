@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8737140495605309094}
   - component: {fileID: 2715378803668898278}
   - component: {fileID: 2958956689951503838}
+  - component: {fileID: 6911290262654599433}
   m_Layer: 7
   m_Name: NPCTwo
   m_TagString: Untagged
@@ -106,6 +107,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6911290262654599433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8495828192317719771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8eae01b4ee34f0418e64805dec7d28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fsm: {fileID: 0}
+  myTeam: 1
+  leaderToFollow: {fileID: 2928912201411345667, guid: 0071638a16be5f240bdd6ff93f179fc8, type: 3}
+  safeNode: {fileID: 0}
+  attack: 10
+  maxHp: 100
+  hp: 100
+  _maxSpeed: 5
+  _maxForce: 5
+  _alignmentWeight: 1
+  _separationWeight: 1.75
+  _cohesionWeight: 1
+  _viewRadius: 2
+  viewAngle: 120
+  _obstacles:
+    serializedVersion: 2
+    m_Bits: 8
+  allEnemies: []
+  rangeToAttack: 1
 --- !u!1 &8524654913776837737
 GameObject:
   m_ObjectHideFlags: 0

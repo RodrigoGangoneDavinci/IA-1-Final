@@ -119,23 +119,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8eae01b4ee34f0418e64805dec7d28b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fsm: {fileID: 0}
+  myTeam: 0
+  leaderToFollow: {fileID: 5610768927019581124, guid: 8ffb4eaa9b28aae41b33ecf52fabf587, type: 3}
+  safeNode: {fileID: 0}
+  attack: 10
+  maxHp: 100
+  hp: 100
   _maxSpeed: 5
   _maxForce: 5
+  _alignmentWeight: 1
+  _separationWeight: 1.75
+  _cohesionWeight: 1
   _viewRadius: 2
+  viewAngle: 90
   _obstacles:
     serializedVersion: 2
     m_Bits: 8
-  myTeam: 0
-  leaderToFollow: {fileID: 5610768927019581124, guid: 8ffb4eaa9b28aae41b33ecf52fabf587, type: 3}
-  hp: 100
-  maxHp: 100
-  safeNode: {fileID: 0}
-  viewRadius: 2
-  viewAngle: 120
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 8
   allEnemies: []
+  rangeToAttack: 1
 --- !u!1 &7707705204868925740
 GameObject:
   m_ObjectHideFlags: 0
