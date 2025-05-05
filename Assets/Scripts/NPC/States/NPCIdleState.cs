@@ -19,11 +19,14 @@ public class NPCIdleState : State
     {
         Debug.Log($"[NPC {_npc.name}] Estoy en Idle");
         
-        if (_npc.leaderToFollow == null) return;
         if (_npc.hp <= _npc.maxHp/2) return; //no salgo de idle
-
-        float distanceToLeader = Vector3.Distance(_npc.transform.position, _npc.leaderToFollow.transform.position);
         
+        // 0- Chequeo si hay enemigo en FOV
+        NPC target = _npc.GetNearestEnemyInFOV();
+        if (target != null) _npc._fsm.ChangeState(NPCStates.Attack);
+
+        // 1- Me muevo buscando al leader
+        float distanceToLeader = Vector3.Distance(_npc.transform.position, _npc.leaderToFollow.transform.position);
         if (distanceToLeader >= followDistance) fsm.ChangeState(NPCStates.Move);
     }
 

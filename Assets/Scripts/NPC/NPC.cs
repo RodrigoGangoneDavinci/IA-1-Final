@@ -98,6 +98,28 @@ public class NPC : MonoBehaviour
         return !Physics.Raycast(start, dir.normalized, dir.magnitude, _obstacles);
     }
     
+    //Enemy Nearest
+    public NPC GetNearestEnemyInFOV()
+    {
+        float minDistance = Mathf.Infinity;
+        NPC closestEnemy = null;
+
+        foreach (var enemy in GameManager.instance.GetAllNPCsFromCounterTeam(myTeam))
+        {
+            if (enemy == null || !IsInFieldOfView(enemy.transform.position)) continue;
+
+            float dist = Vector3.Distance(transform.position, enemy.transform.position);
+            if (dist < minDistance)
+            {
+                minDistance = dist;
+                closestEnemy = enemy;
+            }
+        }
+
+        return closestEnemy;
+    }
+
+    
     public void TakeDamage(float damage)
     {
         hp -= damage;
