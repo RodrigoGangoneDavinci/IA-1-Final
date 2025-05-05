@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class Leader : MonoBehaviour
 {
-    //TODO : crear variable _speed para mover a los leards
-    protected FiniteStateMachine _fsm;
-    protected float hp;
-    protected float maxHp = 100f;
-    public float speed = 4f;
+    public FiniteStateMachine _fsm;
+    public float hp;
+    public float maxHp = 100f;
+    public float speed = 5f;
     public float rotation = 10f;
     
     [SerializeField] Transform safeNode;
@@ -44,6 +43,15 @@ public class Leader : MonoBehaviour
             Vector3 targetNode = NodeGrid.GetClosestNode(clickPosition).Position;
             MoveTo(targetNode);
         }
+    }
+    
+    public bool HasLineOfSight(Vector3 target)
+    {
+        Vector3 origin = transform.position + Vector3.up * 0.5f;
+        Vector3 dir = (target - origin).normalized;
+        float dist = Vector3.Distance(origin, target);
+        
+        return !Physics.Raycast(origin, dir, dist, LayerMask.GetMask("Wall"));
     }
     
     public void TakeDamage(float damage)

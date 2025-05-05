@@ -1,33 +1,31 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class MoveState : State
+public class ScapeState : State
 {
-    private Leader _leader;
+    Leader _leader;
     
-    private Vector3 _destination;
-    private List<Vector3> _path = new();
-    private int _currentPathIndex;
+    Vector3 _destination;
+    List<Vector3> _path = new();
+    int _currentPathIndex;
 
-    public MoveState(Leader leader)
+    public ScapeState(Leader leader)
     {
         _leader = leader;
     }
 
     public override void OnEnter()
     {
-        _destination = _leader.targetPosition;
+        _destination = _leader.SafeNodePosition;
 
-        if (HasLineOfSight(_destination))
+        if (_leader.HasLineOfSight(_destination))
         {
-            Debug.Log($"[Leader {_leader.name}] Usando LINE OF SIGHT hacia {_destination}");
             _path.Clear();
             _path.Add(_destination);
             _currentPathIndex = 0;
         }
         else
         {
-            Debug.Log($"[Leader {_leader.name}] Usando THETA* hacia {_destination}");
             _path = ThetaStarPathfinding.GetPath(_leader.transform.position, _destination);
             _currentPathIndex = 0;
         }
@@ -47,16 +45,14 @@ public class MoveState : State
             _currentPathIndex++;
             if (_currentPathIndex >= _path.Count)
             {
-                fsm.ChangeState(LeaderStates.Idle);
+                _leader._fsm.ChangeState(LeaderStates.Idle); // se queda en nodo seguro
             }
         }
         else
         {
-            // Movimiento
             Vector3 moveDir = flatDir.normalized;
             _leader.transform.position += moveDir * (_leader.speed * Time.deltaTime);
 
-            // Rotación suave hacia el objetivo
             if (moveDir != Vector3.zero)
             {
                 Quaternion targetRot = Quaternion.LookRotation(moveDir);
@@ -68,15 +64,5 @@ public class MoveState : State
     public override void OnExit()
     {
         _path.Clear();
-    }
-
-    //TODO: hacer este metodo parte de LEADER para usar en MoveState y en ScapeState
-    bool HasLineOfSight(Vector3 target)
-    {
-        Vector3 origin = _leader.transform.position + Vector3.up * 0.5f;
-        Vector3 dir = (target - origin).normalized;
-        float dist = Vector3.Distance(origin, target);
-        
-        return !Physics.Raycast(origin, dir, dist, LayerMask.GetMask("Wall"));
     }
 }
