@@ -1490,6 +1490,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPCOne (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6770764776107543996, guid: 91a8fdd651de000428925f87d40dde78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7442777252655688444, guid: 91a8fdd651de000428925f87d40dde78, type: 3}
       propertyPath: safeNode
       value: 
@@ -3087,6 +3091,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1414305061 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2928912201411345667, guid: 0071638a16be5f240bdd6ff93f179fc8, type: 3}
+  m_PrefabInstance: {fileID: 8923691009871360105}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f8cc36b64e3ac43af892a56998f89b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1465293783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4157,6 +4172,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPCOne (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6770764776107543996, guid: 91a8fdd651de000428925f87d40dde78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7442777252655688444, guid: 91a8fdd651de000428925f87d40dde78, type: 3}
       propertyPath: safeNode
       value: 
@@ -4497,6 +4516,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPCOne
       objectReference: {fileID: 0}
+    - target: {fileID: 6770764776107543996, guid: 91a8fdd651de000428925f87d40dde78, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7442777252655688444, guid: 91a8fdd651de000428925f87d40dde78, type: 3}
       propertyPath: safeNode
       value: 
@@ -4574,6 +4597,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6911290262654599433, guid: d57ff419048559b49b489ea9334f3637, type: 3}
+      propertyPath: safeNode
+      value: 
+      objectReference: {fileID: 1179292189}
+    - target: {fileID: 6911290262654599433, guid: d57ff419048559b49b489ea9334f3637, type: 3}
+      propertyPath: leaderToFollow
+      value: 
+      objectReference: {fileID: 1414305061}
     - target: {fileID: 8495828192317719771, guid: d57ff419048559b49b489ea9334f3637, type: 3}
       propertyPath: m_Name
       value: NPCTwo

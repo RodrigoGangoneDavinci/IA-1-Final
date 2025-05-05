@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fsm: {fileID: 0}
+  _defaultMaterial: {fileID: 2100000, guid: 50994b93508eee54c86a9bb1dcb2341d, type: 2}
+  _damageMaterial: {fileID: 2100000, guid: 1f0f80399cc648a43b546153fe70aafb, type: 2}
   myTeam: 1
   leaderToFollow: {fileID: 2928912201411345667, guid: 0071638a16be5f240bdd6ff93f179fc8, type: 3}
   safeNode: {fileID: 0}

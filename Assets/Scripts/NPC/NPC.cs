@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Serialization;
@@ -5,6 +6,12 @@ using UnityEngine.Serialization;
 public class NPC : MonoBehaviour
 {
     public FiniteStateMachine _fsm; //✅
+    
+    [Header("View")]
+    [SerializeField] public Material _defaultMaterial;
+    [SerializeField] public Material _damageMaterial;
+    private Renderer _renderer;
+
 
     [Header("Basics")]
     [SerializeField] public LeaderTeam myTeam; //✅
@@ -33,13 +40,14 @@ public class NPC : MonoBehaviour
     [Header("Enemies")] 
     [SerializeField] List<NPC> allEnemies = new(); //✅ // se llena automáticamente desde un GameManager
     [SerializeField] public float rangeToAttack = 1f; //✅ //Rango para atacar
-
+    
     public Vector3 TargetPosition => leaderToFollow != null ? leaderToFollow.transform.position : transform.position;
 
     private void Awake()
     {
         hp = maxHp;
         rangeToAttack = _viewRadius / 2;
+        _renderer = GetComponentInChildren<Renderer>();
     }
 
     void Start()
@@ -59,10 +67,6 @@ public class NPC : MonoBehaviour
     void Update()
     {
         _fsm.Update();
-
-        //Prioridades:
-        // 1- Escapar si tengo poca vida
-        //if (hp <= maxHp / 2) _fsm.ChangeState(NPCStates.Scape);
         
         //TODO: DEBUG -> Daño a todos los NPCs sin importar el LEADER TEAM
         if (Input.GetKeyDown(KeyCode.E))
@@ -123,12 +127,23 @@ public class NPC : MonoBehaviour
     public void TakeDamage(float damage)
     {
         hp -= damage;
+        
+        if (_renderer != null && _damageMaterial != null && _defaultMaterial != null)
+            StartCoroutine(FlashDamageMaterial());
 
         if (hp <= 0)
             _fsm.ChangeState(NPCStates.Dead);
         else if (hp <= maxHp / 2)
             _fsm.ChangeState(NPCStates.Scape);
     }
+    
+    private IEnumerator FlashDamageMaterial()
+    {
+        _renderer.material = _damageMaterial;
+        yield return new WaitForSeconds(0.5f);
+        _renderer.material = _defaultMaterial;
+    }
+
     
     //Creo un angulo
     Vector3 GetAngleFromDir(float angleInDegrees)
