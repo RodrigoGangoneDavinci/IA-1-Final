@@ -19,8 +19,11 @@ public class NPCMoveState : State
         Debug.Log($"[NPC {_npc.name}] Estoy en Move");
         
         // 0- Chequeo si hay enemigo en FOV
-        NPC target = _npc.GetNearestEnemyInFOV();
-        if (target != null) _npc._fsm.ChangeState(NPCStates.Attack);
+        if (_npc.GetNearestEnemyInFOV() != null)
+        {
+            _npc._fsm.ChangeState(NPCStates.Attack);
+            return;
+        }
 
         // 1- Chequeo si no hay obstaculos
         if (!_npc.HastToUseObstacleAvoidance())

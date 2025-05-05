@@ -60,7 +60,7 @@ public class NPC : MonoBehaviour
     {
         _fsm.Update();
 
-        //Prioridades
+        //Prioridades:
         // 1- Escapar si tengo poca vida
         //if (hp <= maxHp / 2) _fsm.ChangeState(NPCStates.Scape);
         

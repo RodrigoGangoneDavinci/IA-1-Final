@@ -22,8 +22,11 @@ public class NPCIdleState : State
         if (_npc.hp <= _npc.maxHp/2) return; //no salgo de idle
         
         // 0- Chequeo si hay enemigo en FOV
-        NPC target = _npc.GetNearestEnemyInFOV();
-        if (target != null) _npc._fsm.ChangeState(NPCStates.Attack);
+        if (_npc.GetNearestEnemyInFOV() != null)
+        {
+            _npc._fsm.ChangeState(NPCStates.Attack);
+            return;
+        }
 
         // 1- Me muevo buscando al leader
         float distanceToLeader = Vector3.Distance(_npc.transform.position, _npc.leaderToFollow.transform.position);
