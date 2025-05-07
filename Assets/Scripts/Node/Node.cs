@@ -19,9 +19,8 @@ public class Node : MonoBehaviour
 
         foreach (var dir in directions)
         {
-            //TODO: agregar que ignore tambien a la layermask "NPC"
             // ignoro la layer "Leader"
-            int mask = ~(1 << LayerMask.NameToLayer("Leader"));
+            int mask = ~( (1 << LayerMask.NameToLayer("Leader")) | (1 << LayerMask.NameToLayer("NPC")) );
 
             if (Physics.Raycast(transform.position, dir, out RaycastHit hit, 4.5f, mask))
             {
@@ -34,7 +33,7 @@ public class Node : MonoBehaviour
         }
     }
 
-    /*void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         Vector3 origin = transform.position;
         Vector3[] directions = {
@@ -49,7 +48,7 @@ public class Node : MonoBehaviour
             Vector3 target = origin + dir * 4.5f;
             
             // ignoro la layer "Leader"
-            int mask = ~(1 << LayerMask.NameToLayer("Leader"));
+            int mask = ~( (1 << LayerMask.NameToLayer("Leader")) | (1 << LayerMask.NameToLayer("NPC")) );
 
             Ray ray = new Ray(origin, dir);
             if (Physics.Raycast(ray, out RaycastHit hit, 4.5f, mask, QueryTriggerInteraction.Collide))
@@ -74,6 +73,6 @@ public class Node : MonoBehaviour
 
             Gizmos.DrawLine(origin, target);
         }
-    }*/
+    }
 
 }
